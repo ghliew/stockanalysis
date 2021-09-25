@@ -54,7 +54,6 @@ pydub==0.25.1
 PyHyphen==4.0.1
 pyjsparser==2.7.1
 PyJWT==2.1.0
-pyodbc===4.0.0-unsupported
 PyPrind==2.11.3
 pyreadline==2.1
 pySmartDL==1.3.4
