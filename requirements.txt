@@ -1,6 +1,5 @@
 aiohttp==3.7.4.post0
 altair==4.1.0
-anaconda-client==1.7.2
 appdirs==1.4.4
 argh==0.26.2
 astor==0.8.1
