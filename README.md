@@ -13,5 +13,8 @@ This application consists:
 
 <img src="demo.gif" width="50%" height="50%">
 
+## Technologies Used
+Python, Pandas, Tweepy, Yfinance, Matplotlib, Textblob, Streamlit
+
 ## Contact
 [LinkedIn](https://www.linkedin.com/in/guang-hui-liew/)
