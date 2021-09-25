@@ -75,9 +75,6 @@ class TweetListener(tweepy.StreamListener):
          sentiment_str
          ),
          unsafe_allow_html=1)
-        # st.write()
-        # st.write(f'Location: {status.user.location}')
-        # st.write(f'Sentiment: {sentiment}')
         # print(f'Screen name: {status.user.screen_name}')
         # print(f'Status: {tweet_text}')
         # print(f'Location: {status.user.location}')

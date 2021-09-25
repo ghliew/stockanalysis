@@ -1,5 +1,4 @@
 import streamlit as st
-import stocksutil as sutil
 from tweetlistener import TweetListener
 import yfinance as yf
 import pandas as pd
@@ -18,6 +17,11 @@ from stocksutil import get_yahoo_link
 yf.pdr_override() # <== that's all it takes :-)
 
 #System Strings
+TEXT_SIDEBAR = '''#### Connect With Me:
+- 🌐 [Website](https://ghliew.github.io)
+- 💻 [GitHub](https://github.com/ghliew/stockbrew)
+- 👨‍💻 [LinkedIn](https://www.linkedin.com/in/guang-hui-liew/)
+'''
 TEXT_PRICE = '''## {} - {} {}
 #### {} - {}
 '''
@@ -25,16 +29,17 @@ TEXT_RSI = '''## {} {}
 ### {}
 '''
 TEXT_DEFAULT_RSI = 'Current RSI:'
-
 TEXT_LINK = '''[Google News]({}), [Yahoo Finance]({})'''
 
 def get_stock_df(ticker):
+    '''Get a ticker's price from start date to end date and return in a Dataframe'''
     enddate = dt.datetime.now()
     startdate = dt.datetime.now() - relativedelta(years=1)
     df = pdr.get_data_yahoo(ticker, start=startdate, end=enddate)
     return df
 
 def get_rsi_df(df_c):
+    '''Calculate RSI value and return in a Dataframe with Close Price'''
     df = df_c.copy()
     change = df['Adj Close'].diff(1)
     change.dropna(inplace=True)
@@ -56,6 +61,7 @@ def get_rsi_df(df_c):
 
 
 def get_rsi_fig(df_combined):
+    '''Plot the RSI and Close Price figures'''
     combined = df_combined    
     fig, axs = plt.subplots(nrows=2, ncols=1, figsize=(12,8))
     axs[0].plot(combined.index, combined['Adj Close'], color='lightgray')
@@ -86,12 +92,7 @@ def get_ls_symbol(df_sym):
     return ls_symbol
 
 def get_price_chg_str(df_sym):
-    '''Return a str with stock price and percentage change from yesterday
-    Args:
-        df_sym (pandas.DataFrame)
-    Returns:
-        pchange_str (str)
-    '''
+    '''Return a str with stock price and percentage change from yesterday'''
     close_prev = df_sym['Close'].values[-2]
     close_latest =  df_sym['Close'].values[-1]
     price_chg = (close_latest/close_prev-1)*100
@@ -101,12 +102,7 @@ def get_price_chg_str(df_sym):
     return price_chg_str
 
 def get_current_rsi_str(df_rsi):
-    '''Return a str with current RSI value
-    Args:
-        df_rsi (pandas.DataFrame)
-    Returns:
-        rsi_str (str)
-    '''
+    '''Return a str with current RSI value'''
     rsi = df_rsi['RSI'].values[-1]
     if rsi >= 70:
         rsi_color = 'green'
@@ -122,6 +118,7 @@ def get_current_rsi_str(df_rsi):
 
 # @st.cache()
 def get_tweets_sentimental(text, num_tweet):
+    '''Tweets Sentimental Analysis and return a dictionary with sentiment values'''
     auth = tweepy.OAuthHandler(keys.consumer_key, keys.consumer_secret)
     auth.set_access_token(keys.access_token, keys.access_token_secret)  
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True) 
@@ -136,12 +133,15 @@ def get_tweets_sentimental(text, num_tweet):
 
 @st.cache()
 def get_snp_data():
+    '''Read S&P500 table into a Dataframe'''
     SNP_TABLE_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     html = pd.read_html(SNP_TABLE_URL, header=0)
     df = html[0]
     return df
 
-### Streamlit UI ###
+#####################
+### Streamlit UI  ###
+#####################
 st.set_page_config(page_title="Stock Brew ☕")
 
 st.title("Stock Brew ☕")
@@ -166,6 +166,8 @@ sorted_sector_unique = sorted( df['GICS Sector'].unique() )
 selected_sector = st.sidebar.multiselect('Sector', sorted_sector_unique, sorted_sector_unique)
 # Sector filtered dataframe
 df_selected_sector = df[ (df['GICS Sector'].isin(selected_sector)) ]
+
+st.sidebar.write(TEXT_SIDEBAR)
 
 st.header('S&P500')
 with st.expander("📘 - See S&P500 Explanation"):
@@ -206,7 +208,7 @@ if ticker!="Select":
 
     #Links to Yahoo Finance and Google News
     with st.expander("📘 - Useful Links"):
-        st.write(TEXT_LINK.format(get_google_link,get_yahoo_link))
+        st.write(TEXT_LINK.format(get_google_link(ticker),get_yahoo_link(ticker)))
 
     #Tweet Sentimental Analysis
     st.header('Live Tweet Sentimental Analysis')
