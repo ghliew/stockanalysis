@@ -50,7 +50,6 @@ protobuf==3.17.2
 pyasn1==0.4.8
 pyasn1-modules==0.2.7
 pycosat==0.6.3
-pycurl==7.43.0.6
 pydub==0.25.1
 PyHyphen==4.0.1
 pyjsparser==2.7.1
