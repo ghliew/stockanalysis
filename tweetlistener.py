@@ -64,7 +64,7 @@ class TweetListener(tweepy.StreamListener):
             sentiment = 'Negative'
             self.sentiment_dict['negative'] += 1 
             
-        # display the tweet
+        display the tweet
         name_str = f'Screen name: {status.user.screen_name}'
         status_str = f'Status: {tweet_text}'
         location_str = f'Location: {status.user.location}'
