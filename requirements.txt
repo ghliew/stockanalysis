@@ -1,5 +1,4 @@
 aiohttp==3.7.4.post0
-altair==4.1.0
 appdirs==1.4.4
 argh==0.26.2
 astor==0.8.1
@@ -56,7 +55,6 @@ pkginfo==1.7.0
 ply==3.11
 protobuf==3.14.0
 pubnub==5.1.4
-pyarrow==5.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycosat==0.6.3
