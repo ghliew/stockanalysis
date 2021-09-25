@@ -43,7 +43,7 @@ multidict==5.1.0
 multipledispatch==0.6.0
 multitasking==0.0.9
 mypy-extensions==0.4.3
-numpy==1.19.3
+numpy
 oauthlib==3.1.0
 olefile==0.46
 pandas-datareader==0.10.0
