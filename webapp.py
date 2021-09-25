@@ -119,8 +119,8 @@ def get_current_rsi_str(df_rsi):
 # @st.cache()
 def get_tweets_sentimental(text, num_tweet):
     '''Tweets Sentimental Analysis and return a dictionary with sentiment values'''
-    auth = tweepy.OAuthHandler(keys.consumer_key, keys.consumer_secret)
-    auth.set_access_token(keys.access_token, keys.access_token_secret)  
+    auth = tweepy.OAuthHandler(st.secrets["consumer_key"], st.secrets["consumer_secret"])
+    auth.set_access_token(st.secrets["access_token"], st.secrets["access_token_secret"])  
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True) 
     search_key = text
     limit = num_tweet
