@@ -70,7 +70,6 @@ PyJWT==1.7.1
 pyreadline==2.1
 pytest==6.2.3
 python-dotenv==0.19.0
-pywin32==227
 pywin32-ctypes==0.2.0
 pywinpty==0.5.7
 PyYAML==5.4.1
