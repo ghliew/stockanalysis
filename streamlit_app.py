@@ -24,6 +24,7 @@ TEXT_SIDEBAR = '''#### Connect With Me:
 '''
 TEXT_PRICE = '''## {} - {} {}
 #### {} - {}
+## Current Price: {}
 '''
 TEXT_RSI = '''## {} {}
 ### {}
@@ -189,7 +190,8 @@ if ticker!="Select":
         *df_ticker['Security'],
         price_chg_str,
         *df_ticker['GICS Sector'],
-        *df_ticker['GICS Sub-Industry']
+        *df_ticker['GICS Sub-Industry'],
+        "{:.2f}".format(df_ticker_price['Close'].values[-1])
         ), 
         unsafe_allow_html=1)
     df_rsi = get_rsi_df(df_ticker_price)
