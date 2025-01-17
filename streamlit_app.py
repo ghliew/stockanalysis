@@ -14,6 +14,8 @@ from pandas_datareader import data as pdr
 from stocksutil import get_google_link
 from stocksutil import get_yahoo_link
 
+st.set_page_config(page_title="Stock Brew ☕")
+
 yf.pdr_override() # <== that's all it takes :-)
 
 #System Strings
@@ -132,7 +134,7 @@ def get_tweets_sentimental(text, num_tweet):
     return sentiment_dict
 
 
-@st.cache()
+@st.cache_data()
 def get_snp_data():
     '''Read S&P500 table into a Dataframe'''
     SNP_TABLE_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
@@ -143,7 +145,6 @@ def get_snp_data():
 #####################
 ### Streamlit UI  ###
 #####################
-st.set_page_config(page_title="Stock Brew ☕")
 
 st.title("Stock Brew ☕")
 
