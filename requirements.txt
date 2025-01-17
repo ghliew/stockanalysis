@@ -59,7 +59,7 @@ toolz==0.11.1
 tqdm==4.62.3
 tweepy==3.10.0
 tweet-preprocessor==0.6.0
-typing-extensions==3.10.0.2
+typing-extensions==4.12.2
 tzdata==2023.3
 tzlocal==3.0
 urllib3==2.0.4
